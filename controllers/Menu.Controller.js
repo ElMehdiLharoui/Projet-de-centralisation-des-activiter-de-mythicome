@@ -34,16 +34,14 @@ exports.update = async (req, res) => {
     price: req.body.price,
     description: req.body.description,
     vitamines: req.body.vitamines,
-    type: req.body.type,
+    typePlat: req.body.typePlat,
   };
 
   if (req.file) {
     try {
       const data = await fs.promises.readFile(req.file.path);
-      updates.Image = {
-        data: data,
-        contentType: req.file.mimetype,
-      };
+      updates.Image =  Date.now() + "-" + req.file.originalname, 
+        
       await fs.promises.unlink(req.file.path);
     } catch (err) {
       console.error(err);

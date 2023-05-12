@@ -2,7 +2,7 @@ const router = require("express").Router();
 const multer = require("multer");
 const MenuController = require("../controllers/Menu.Controller");
 const ImageHeplp = require("../helpers/imageUpload");
-const upload = multer({ storage: MenuController.storage });
+const upload = multer({ storage: ImageHeplp.storage });
 module.exports = (app) => {
     
   router.post("/", upload.single("Image"), MenuController.create);

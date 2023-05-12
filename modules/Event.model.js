@@ -20,6 +20,9 @@ const EventModel = new mongoose.Schema({
     ref: "users",
   }],
   dateFinal: Date,
-  Image: { data: Buffer, contentType: String },
+  Image: {
+    url: String,
+    contentType: String
+  }
 });
 module.exports = mongoose.model("events", EventModel);

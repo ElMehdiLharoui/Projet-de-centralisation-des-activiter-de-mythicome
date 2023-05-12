@@ -14,7 +14,10 @@ const MenuModel = new mongoose.Schema({
     minLength: 6,
     maxlength: 1024,
   },
-  Image: { data: Buffer, contentType: String },
+  Image: {
+    url: String,
+    contentType: String
+  },
   vitamines: { type: Array, default: [] },
   typePlat: {
     type: String,
