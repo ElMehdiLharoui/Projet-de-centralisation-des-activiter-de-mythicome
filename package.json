@@ -25,11 +25,5 @@
   "devDependencies": {
     "nodemon": "^2.0.22"
   },
-<<<<<<< HEAD
-  "engines": {
-    "node": ">=14"
-  }
-=======
   "engines": {"node": ">=14"}
->>>>>>> 37c0c3005d45bd23719c632ef585e94e38e9d1ee
 }

@@ -16,47 +16,16 @@ const storage = multer.diskStorage({
 });
 console.log("log33" + JSON.stringify(storage));
 exports.storage = storage;
-exports.create = (req, res) => {
-    const Model = {
-        plat: req.body.plat,
-        price: req.body.price,
-        description: req.body.description,
-        vitamines: req.body.vitamines,
-        typePlat: req.body.typePlat,
-      };
-    ImageHeplp.ImageHeplp(req,res,MenuModel);
+exports.create = async (req, res) => { 
+   newModel = new MenuModel({
+    ...req.body,
+    vitamines : req.body.vitamines.split(",") || [], 
+  });
+  await  ImageHeplp.ImageHealperCreate(req,res,MenuModel,newModel); 
 };
-
+ 
 exports.update = async (req, res) => {
-  const eventId = req.params.id;
-  const updates = {
-    plat: req.body.plat,
-    price: req.body.price,
-    description: req.body.description,
-    vitamines: req.body.vitamines,
-    typePlat: req.body.typePlat,
-  };
-
-  if (req.file) {
-    try {
-      const data = await fs.promises.readFile(req.file.path);
-      updates.Image =  Date.now() + "-" + req.file.originalname, 
-        
-      await fs.promises.unlink(req.file.path);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Erreur lors de la gestion du fichier d'image");
-      return;
-    }
-  }
-
-  try {
-    await MenuModel.findByIdAndUpdate(eventId, updates);
-    res.send("Événement mis à jour avec succès");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erreur de la mise à jour ");
-  }
+  await ImageHeplp.ImageHealpUpdate(req,res,MenuModel);
 };
 exports.getAll = (req, res) => {
   MenuModel.find()
@@ -74,7 +43,7 @@ exports.delete = (req, res) => {
 
   MenuModel.findByIdAndRemove(eventId)
     .then(() => {
-      res.send("Événement supprimé avec succès");
+      res.send("supprimé avec succès");
     })
     .catch((err) => {
       console.error(err);

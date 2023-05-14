@@ -20,45 +20,15 @@ exports.storage = storage;
 //(exports.create = upload.single("image")),
 
 exports.create = async (req, res) => {
-
-      await ImageHeplp.ImageHealperCreate(req,res,EventModel);
+  newModel = new EventModel({
+    ...req.body, 
+  });
+      await ImageHeplp.ImageHealperCreate(req,res,EventModel,newModel);
 };
 
 exports.update = async (req, res) => {
-  const eventId = req.params.id;
-  const updates = {
-    name: req.body.name,
-    description: req.body.description,
-    clubName: req.body.clubName,
-    ville: req.body.ville,
-    paticipentMax: req.body.paticipentMax,
-    startTime: req.body.startTime,
-    endTime: req.body.endTime,
-    dateFinal: req.body.dateFinal,
-  };
-
-  if (req.file) {
-    try {
-      const data = await fs.promises.readFile(req.file.path);
-      updates.Image = {
-        data: data,
-        contentType: req.file.mimetype,
-      };
-      await fs.promises.unlink(req.file.path);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Erreur lors de la gestion du fichier d'image");
-      return;
-    }
-  }
-
-  try {
-    await EventModel.findByIdAndUpdate(eventId, updates);
-    res.send("Événement mis à jour avec succès");
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Erreur lors de la mise à jour de l'événement");
-  }
+ 
+  await ImageHeplp.ImageHealperUpdate(req,res,EventModel);
 };
 exports.getAll = (req, res) => {
   EventModel.find()
