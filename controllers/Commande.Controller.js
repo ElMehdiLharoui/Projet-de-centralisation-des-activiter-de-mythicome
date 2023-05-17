@@ -7,13 +7,16 @@ exports.create = async (req, res) => {
     listOrder: req.body.listOrder,
     Statut: req.body.Statut,
     DateOreder: req.body.DateOreder,
-    Livreur:req.body.Livreur,
+    Livreur: req.body.Livreur,
+    ReferenceComande: Date.now().toString(),
   });
   try {
     //   const Commande = new commandeModel({ ...req.body });
-    await newModel.save();
+    const Commande = await newModel.save();
+    console.log(Commande);
     res.status(201).send({
       message: "Commande created",
+      commandeRference: Commande.ReferenceComande,
     });
   } catch (error) {
     res.status(500).send({
@@ -82,21 +85,4 @@ exports.getByUser = async (req, res) => {
       message: `error : ${error.message}`,
     });
   }
-};
-
-exports.addLivreur = async (req, res) => {
-    const commandeId= req.body.id;
-    const   Livreur  = req.body.Livreur;
-    try {
-   await commandeModel.findByIdAndUpdate(
-        commandeId,
-        { $set: { Livreur: Livreur } },
-        { new: true }
-      )
-        res.send("Événement mis à jour avec succès");
-      } catch (err) {
-        console.error(err);
-        res.status(500).send("Erreur lors de la mise à jour de l'événement");
-      }
-
 };

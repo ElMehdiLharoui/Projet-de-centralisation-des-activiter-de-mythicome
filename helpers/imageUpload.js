@@ -113,7 +113,7 @@ exports.ImageHealperCreate = async (req, res, ModelSchema,newModel) => {
   }
 };
 
-exports.ImageHealperUpdate = async (req, res, ModelSchema) => {
+exports.ImageHealperUpdate = async (req, res, ModelSchema,newModel) => {
   try {
     if (!req.file) {
       return res.status(400).send("Aucun image ");

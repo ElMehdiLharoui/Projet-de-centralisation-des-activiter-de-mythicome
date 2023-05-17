@@ -16,16 +16,23 @@ const storage = multer.diskStorage({
 });
 console.log("log33" + JSON.stringify(storage));
 exports.storage = storage;
-exports.create = async (req, res) => { 
-   newModel = new MenuModel({
+exports.create = async (req, res) => {
+  console.log("type"+typeof(req.body.vitamines));
+  newModel = new MenuModel({
     ...req.body,
-    vitamines : req.body.vitamines.split(",") || [], 
+    vitamines: req.body.vitamines.split(",") || [],
   });
-  await  ImageHeplp.ImageHealperCreate(req,res,MenuModel,newModel); 
+  await ImageHeplp.ImageHealperCreate(req, res, MenuModel, newModel);
 };
- 
+
 exports.update = async (req, res) => {
-  await ImageHeplp.ImageHealpUpdate(req,res,MenuModel);
+  console.log("type"+typeof(req.body.vitamines));
+  const vitamines = req.body.vitamines.split(",") || [];
+  newModel = {
+    ...req.body,
+    vitamines: vitamines,
+  };
+  await ImageHeplp.ImageHealpUpdate(req, res, MenuModel, newModel);
 };
 exports.getAll = (req, res) => {
   MenuModel.find()

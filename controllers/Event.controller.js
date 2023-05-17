@@ -1,5 +1,4 @@
 const EventModel = require("../modules/Event.model");
-const axios = require("axios");
 const multer = require("multer");
 const fs = require("fs");
 const  ImageHeplp  = require("../helpers/imageUpload");
@@ -27,7 +26,6 @@ exports.create = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
- 
   await ImageHeplp.ImageHealperUpdate(req,res,EventModel);
 };
 exports.getAll = (req, res) => {
@@ -37,9 +35,10 @@ exports.getAll = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Erreur lors de la récupération des événements");
+      res.status(500).send("Erreur  de récupération");
     });
 };
+// get Event  BY Id
 exports.delete = (req, res) => {
   const eventId = req.params.id;
 
@@ -49,7 +48,7 @@ exports.delete = (req, res) => {
     })
     .catch((err) => {
       console.error(err);
-      res.status(500).send("Erreur lors de la suppression de l'événement");
+      res.status(500).send("Erreur  de  suppression ");
     });
 };
 exports.addParticipant = async (req, res) => {

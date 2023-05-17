@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // this is express routes
-require("./routes/Livreur.routes")(app);
+require("./routes/Formation.routes")(app);
 require("./routes/User.Routes")(app);
 require("./routes/Club.routes")(app);
 require("./routes/Event.routes")(app);

@@ -6,6 +6,5 @@ module.exports = (app) => {
     router.delete("/id=" + ":id", CommandeController.delete);
     router.get("/Uid=" + ":id", CommandeController.getByUser);
     router.get("/id=" + ":id", CommandeController.getOne);
-    router.patch("/Lid=" + ":id", CommandeController.addLivreur);
     app.use("/Commande", router);
   };

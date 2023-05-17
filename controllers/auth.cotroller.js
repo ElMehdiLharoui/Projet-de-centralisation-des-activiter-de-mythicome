@@ -70,3 +70,15 @@ exports.delete = async (req, res) => {
     });
   }
 };
+
+exports.getOne = async (req, res) => {
+  try {
+    const userId =  req.params.id;
+    const user = await userModel.findById(userId);
+    res.status(200).send(user);
+  } catch (error) {
+    res.status(500).send({
+      message: `error : ${error.message}`,
+    });
+  }
+};
